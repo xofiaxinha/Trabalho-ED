@@ -1,0 +1,21 @@
+Escrever um programa que avalia expressões matemáticas usando Shunting Yard
+
+Precisa reconhecer:
+‘+’: soma
+‘-’: subtração
+‘*’: multiplicação
+‘/’: divisão
+‘^’: potência
+‘m’: resto da divisão inteira
+‘l’: logaritmo em base 10
+() Parênteses
+Precisa reconhecer um operador inválido
+Precisa reconhecer se a expressão não é válida
+
+Relatório:
+Nome dos integrantes
+Descrição das funcionalidades
+Exemplos
+Contribuição dos integrantes
+Relato do desenvolvimento
+Pontos de dificuldade
