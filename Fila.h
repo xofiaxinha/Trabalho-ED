@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 struct f;
 typedef struct f fila;
 
@@ -9,3 +10,4 @@ void pushFila(fila *f, char c);
 void popFila(fila *f);
 char fila_getToken(fila *f);
 void printFila(fila *f);
+bool isEmptyFila(fila *f);

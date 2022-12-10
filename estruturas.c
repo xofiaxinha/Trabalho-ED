@@ -52,6 +52,13 @@ void printPilha(pilha *p){
     aux = aux->prox;
   }
 }
+bool isEmptyPilha(pilha *p){
+  if(p->prox == NULL)
+    return true;
+  else
+    return false;
+}
+
 fila *novaFila(char c){
   fila *nova = malloc(sizeof(fila));
   nova->c = c;
@@ -82,4 +89,10 @@ void printFila(fila *f){
     printf("%c ", aux->c);
     aux = aux->prox;
   }
+}
+bool isEmptyFila(fila *f){
+  if(f->prox == NULL)
+    return true;
+  else
+    return false;
 }
