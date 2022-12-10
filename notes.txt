@@ -19,3 +19,25 @@ Exemplos
 Contribuição dos integrantes
 Relato do desenvolvimento
 Pontos de dificuldade
+
+- Funcionamento -
+1º Converter da notação normal pra notação polonesa
+    Separamos cada parte da expressão em tokens (char) sendo divididos em operadores, números e parênteses
+Infix Notation:
+  i = 9 + 24/(7 - 3)
+Reverse Polish
+  Notação onde as operações estão na ordem em que devem ser realizadas
+
+Cada vez que um número ou operador é lido nós empurramos para a pilha
+Quando um operador é lido nós removemos os números da pilha, realizamos a operação e empurramos o resultado na pilha
+Esse processo é encerrado quando não há mais tokens para serem lidos
+A operação acima separada em tokens:
+  9, 24, 7, 3, -, /, +
+  1º empurra o 9
+  2º empurra o 24
+  3º empurra o 7
+  4º empurra o 3
+  5º ao encontrar o -, checamos se a pilha tem ao menos 2 elementos e então removemos os últimos dois elementos e realizamos a operação
+  6º empurramos o resultado pra pilha
+  7º ao encontrar o /, fazemos a checagem e depois a operação
+  8º ao encontrar o +, fazemos a checagem e a operação

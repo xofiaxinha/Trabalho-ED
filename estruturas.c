@@ -17,7 +17,7 @@ typedef struct f{
 }fila;
 
 pilha *novaPilha(char c){
-  pilha *nova = malloc(sizeof(pilha));
+  pilha *nova = (pilha*)malloc(sizeof(pilha));
   nova->c = c;
   nova->prox = NULL;
   return nova;
@@ -60,7 +60,7 @@ bool isEmptyPilha(pilha *p){
 }
 
 fila *novaFila(char c){
-  fila *nova = malloc(sizeof(fila));
+  fila *nova = (fila*)malloc(sizeof(fila));
   nova->c = c;
   nova->prox = NULL;
   return nova;
