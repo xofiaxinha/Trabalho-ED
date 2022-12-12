@@ -55,8 +55,7 @@ bool isValid(char *exp){
             if(opPar > clsPar)
                 return false;
         } // checagem com os parenteses
-
-        if(isOP(exp[i])){
+        else if(isOP(exp[i])){
             if(i == 0){
                 if(exp[i] == '-' || exp[i] == '+'){
                     continue;
@@ -79,16 +78,93 @@ bool isValid(char *exp){
                 else continue;
             }}
         } // checagem com os operadores
-
-        if(isSpace(exp[i])) continue;
+        else if(isNum(exp[i])) continue;
+        else if(isSpace(exp[i])) continue;
+          
+      else return false;
+      /*um token da string pode ser ou um parêntese, 
+ou um operador, ou um número, ou um espaço, 
+se não for então a operação é inválida*/
     }
     return true;
 }
+int precedencia(char op){
+  switch(op){
+    case '(':
+    case ')':
+      return 4;
+      break;
+    case '^':
+    case 'l':
+      return 3;
+      break;
+    case 'm':
+    case '/':
+    case '*':
+      return 2;
+      break;
+    case '+':
+    case '-':
+      return 1;
+      break;
+  }
+  return 0;
+}
+float operacoes(float a , float b, char x){
+  switch(x){
+    case '+':
+      return a+b;
+      break;
+    case '-':
+      return a-b;
+      break;
+    case '*':
+      return a*b;
+      break;
+    case '/':
+      return a/b;
+      break;
+    default:
+      return 0.0;
+  }
+}
 void shuntingYard(char *expressao, fila *posfixa){
     // 1º passo: se a expressão for inválida retorna
+    if(!isValid(expressao)){
+      printf("Expressao invalida!\n");
+    }
     // 2º passo: cria uma pilha
+    pilha *p = novaPilha(0);
     // 3º passo: percorre a expressão colocando os números na fila e os operadores na pilha
+    for(int i=0;i<strlen(expressao);i++){
+      if(isNum(expressao[i])){
+        pushfila(posfixa, expressao[i]);
+      }
+      else if(isOp(expressao[i])){
+        pushPilha(p, expressao[i]);
+      }
+      else if(isPar(expressao[i])){
+        pushPilha(p, expressao[i]));
+        else{
+        popPilha(p, expressao[i]));
+        }
+      }else{
+      return false;
+      }
+    }
+    
     // 4º passo: quando encontrar um parêntese, se for aberto, empilha, se for fechado, desempilha até encontrar o parêntese aberto
-    // 5º passo: quando encontrar um operador, desempilha até encontrar um operador de menor precedência
+    // 5º passo: quando encontrar um operador, desempilha até encontrar um operador de maior precedência
     // 6º passo: quando acabar a expressão, desempilha até a pilha ficar vazia, colocando os operadores na fila
+}
+int calcule(fila *posfixa){
+    // 1º passo: cria uma pilha
+    novaPilha(0);
+    // 2º passo: percorre a fila
+    
+    // 3º passo: se for um número, empilha
+    // 4º passo: se for um operador, desempilha os dois últimos números, realiza a operação e empilha o resultado
+    // 5º passo: quando acabar a fila, desempilha o resultado
+    // ps: a fila é uma fila de char, então é necessário converter os números para int
+    // ps2: a função atoi() converte uma string para int
 }

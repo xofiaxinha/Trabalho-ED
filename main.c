@@ -1,22 +1,15 @@
 #include <stdio.h>
+#include "ShuntingYard.h"
 #include "Fila.h"
 #include "Pilha.h"
 int main(void) {
-  char s[] = {'H', 'e', 'l', 'l', 'o', 'w', 'o', 'r', 'l', 'd', '\n'};
-  
-  fila* Fila = novaFila(0);
-  for(int i = 0; s[i]; i++){
-    pushFila(Fila, s[i]);
-  }
-  printf("Teste com Fila:\n");
-  printFila(Fila);
-  printf("\n");
-
-  pilha *Pilha = novaPilha(0);
-  for(int i = 0; s[i]; i++){
-    pushPilha(Pilha, s[i]);
-  }
-  printf("Teste com Pilha:\n");
-  printPilha(Pilha);
-  printf("\n");
+    fila *posfixa = novaFila(0);
+    char exp[100];
+    printf("Digite a expressao: ");
+    scanf(" %[^\n]s", exp);
+    shuntingYard(exp, posfixa);
+    printf("A expressao convertida eh: ");
+    printFila(posfixa);
+    int result = calcule(posfixa);
+    printf("O resultado eh: %d", result);
 }
