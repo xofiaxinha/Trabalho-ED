@@ -165,11 +165,27 @@ void shuntingYard(char *expressao, fila *posfixa){
     // 5º passo: quando encontrar um operador, desempilha até encontrar um operador de maior precedência
     // 6º passo: quando acabar a expressão, desempilha até a pilha ficar vazia, colocando os operadores na fila
 }
+float operacoes(float a , float b, char x){
+  switch(x){
+    case '+':
+      return a+b;
+      break;
+    case '-':
+      return a-b;
+      break;
+    case '*':
+      return a*b;
+      break;
+    case '/':
+      return a/b;
+      break;
+    default:
+      return 0.0;
+  }
+}
 int calcule(fila *posfixa){
     // 1º passo: cria uma pilha
-    novaPilha(0);
     // 2º passo: percorre a fila
-    
     // 3º passo: se for um número, empilha
     // 4º passo: se for um operador, desempilha os dois últimos números, realiza a operação e empilha o resultado
     // 5º passo: quando acabar a fila, desempilha o resultado
