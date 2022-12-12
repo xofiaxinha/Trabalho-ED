@@ -11,3 +11,4 @@ void popPilha(pilha *p);
 char pilha_getToken(pilha *p);
 void printPilha(pilha *p);
 bool isEmptyPilha(pilha *p);
+char topoPilha(pilha *p);

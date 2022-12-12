@@ -96,3 +96,10 @@ bool isEmptyFila(fila *f){
   else
     return false;
 }
+char topoPilha(pilha *p){
+  pilha *aux = p->prox;
+  while(aux->prox != NULL){
+    aux = aux->prox;
+  }
+  return aux->c;
+}

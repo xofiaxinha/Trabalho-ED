@@ -128,31 +128,39 @@ float operacoes(float a , float b, char x){
       return 0.0;
   }
 }
+void desempilharPilha(pilha *op){
+  while(!isEmptyPilha(op)&& precedencia(topoPilha(op))!=3){
+    popPilha(op);
+  }
+}
 void shuntingYard(char *expressao, fila *posfixa){
     // 1º passo: se a expressão for inválida retorna
     if(!isValid(expressao)){
       printf("Expressao invalida!\n");
+			return;
     }
     // 2º passo: cria uma pilha
     pilha *p = novaPilha(0);
     // 3º passo: percorre a expressão colocando os números na fila e os operadores na pilha
     for(int i=0;i<strlen(expressao);i++){
       if(isNum(expressao[i])){
-        pushfila(posfixa, expressao[i]);
+				if(i>=2 && isOP(expressao[i-1]) && isOP(expressao[i-2])) 
+					pushFila(posfixa, expressao[i-1]);
+        pushFila(posfixa, expressao[i]);
       }
-      else if(isOp(expressao[i])){
+      else if(isOP(expressao[i])){
         pushPilha(p, expressao[i]);
+        desempilharPilha(p);
       }
       else if(isPar(expressao[i])){
-        pushPilha(p, expressao[i]));
-        else{
-        popPilha(p, expressao[i]));
+        pushPilha(p, expressao[i]);
         }
-      }else{
-      return false;
+        else{
+        popPilha(p);//terminar a parte de desempilhar até achar os parenteses
+        }
       }
-    }
-    
+      
+      
     // 4º passo: quando encontrar um parêntese, se for aberto, empilha, se for fechado, desempilha até encontrar o parêntese aberto
     // 5º passo: quando encontrar um operador, desempilha até encontrar um operador de maior precedência
     // 6º passo: quando acabar a expressão, desempilha até a pilha ficar vazia, colocando os operadores na fila
