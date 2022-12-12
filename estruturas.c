@@ -27,13 +27,20 @@ void apagaPilha(pilha *p){
 }
 void pushPilha(pilha *p, char c){
   pilha *aux = p;
+  if(p->prox == NULL){
+    pilha *aux2 = novaPilha(c);
+    p->prox = aux2;
+    return;
+  }
   while(aux->prox != NULL){
     aux = aux->prox;
   }
-  aux->prox = novaPilha(c);
+  pilha *aux2 = novaPilha(c);
+  aux->prox = aux2;
 }
 void popPilha(pilha *p){
-  pilha *aux = p->prox, *aux2 = aux;
+  pilha *aux = p->prox, *aux2 = p;
+  if(aux == NULL) return;
   while(aux->prox != NULL) {
     aux2 = aux; //pega o anterior de aux
     aux = aux->prox; //vai pra frente ate o prox ser nulo, 
@@ -73,7 +80,8 @@ void pushFila(fila *f, char c){
   while(aux->prox != NULL){
     aux = aux->prox;
   }
-  aux->prox = novaFila(c);
+  fila *aux2 = novaFila(c);
+  aux->prox = aux2;
 }
 void popFila(fila *f){
   fila *aux = f->prox;
@@ -98,6 +106,7 @@ bool isEmptyFila(fila *f){
 }
 char topoPilha(pilha *p){
   pilha *aux = p->prox;
+  if(aux == NULL) return 0;
   while(aux->prox != NULL){
     aux = aux->prox;
   }

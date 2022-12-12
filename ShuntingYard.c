@@ -145,43 +145,59 @@ void shuntingYard(char *expressao, fila *posfixa){
     for(int i=0;i<strlen(expressao);i++){
       if(isNum(expressao[i])){
 				if(i>=2 && isOP(expressao[i-1]) && isOP(expressao[i-2])) 
-					pushFila(posfixa, expressao[i-1]);
+					pushFila(posfixa, expressao[i-1]); //se o numero for negativo, enfileira o operador junto
         pushFila(posfixa, expressao[i]);
+        //printf("Chegou aqui (isNum)\n");
       }
-      else if(isOP(expressao[i])){
+
+      if(isOP(expressao[i])){
+        int p1 = precedencia(expressao[i]);
+        if(isEmptyPilha(p)){
+          pushPilha(p, expressao[i]);
+          //printf("Chegou aqui (isOP)\n");
+          continue;
+        }
+        if(i == 0 || (i > 1 && isOP(expressao[i-1]))) continue;
+        char aux = topoPilha(p);
+        int p2 = precedencia(aux);
+        while(!isEmptyPilha(p)){
+          if(p1 < p2){
+            popPilha(p);
+            pushFila(posfixa, aux);
+            continue;
+          }
+          break;
+        }
         pushPilha(p, expressao[i]);
-        desempilharPilha(p);
+        //printf("Chegou aqui (isOP)\n");
       }
-      else if(isPar(expressao[i])){
-        pushPilha(p, expressao[i]);
+
+      if(isPar(expressao[i])){
+        if(expressao[i] == '('){
+          pushPilha(p, expressao[i]);
         }
         else{
-        popPilha(p);//terminar a parte de desempilhar até achar os parenteses
+          while(!isEmptyPilha(p)){
+            char aux = topoPilha(p);
+            if(aux == '('){
+              popPilha(p);
+              break;
+            }
+            popPilha(p);
+            pushFila(posfixa, aux);
+          }
         }
+        //printf("Chegou aqui (isPar)\n");
       }
-      
-      
-    // 4º passo: quando encontrar um parêntese, se for aberto, empilha, se for fechado, desempilha até encontrar o parêntese aberto
-    // 5º passo: quando encontrar um operador, desempilha até encontrar um operador de maior precedência
-    // 6º passo: quando acabar a expressão, desempilha até a pilha ficar vazia, colocando os operadores na fila
 }
-float operacoes(float a , float b, char x){
-  switch(x){
-    case '+':
-      return a+b;
-      break;
-    case '-':
-      return a-b;
-      break;
-    case '*':
-      return a*b;
-      break;
-    case '/':
-      return a/b;
-      break;
-    default:
-      return 0.0;
-  }
+    while(!isEmptyPilha(p)){
+      char aux = topoPilha(p);
+      popPilha(p);
+      pushFila(posfixa, aux);
+      //printf("Chegou aqui (while");
+    }
+    //printf("Chegou aqui (fim)\n");
+    free(p);
 }
 int calcule(fila *posfixa){
     // 1º passo: cria uma pilha

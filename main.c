@@ -10,6 +10,6 @@ int main(void) {
     shuntingYard(exp, posfixa);
     printf("A expressao convertida eh: ");
     printFila(posfixa);
-    int result = calcule(posfixa);
-    printf("O resultado eh: %d", result);
+    //int result = calcule(posfixa);
+    //printf("O resultado eh: %d", result);
 }
